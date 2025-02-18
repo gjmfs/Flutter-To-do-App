@@ -27,30 +27,36 @@ class MainAppState extends State<MainApp> {
         ),
         body: Column(
           children: [
-            Container(
-              padding: EdgeInsets.all(10),
-              child: TextField(
-                controller: inputBox1,
-                decoration: InputDecoration(
-                  label: Text("Enter a task"),
-                  border: OutlineInputBorder(),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    child: TextField(
+                      controller: inputBox1,
+                      decoration: InputDecoration(
+                        label: Text("Enter a task"),
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            MaterialButton(
-              color: Colors.white,
-              height: 50,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              onPressed: () {
-                setState(() {
-                  if (!inputBox1.text.isEmpty) {
-                    task.add(inputBox1.text);
-                  }
-                });
-              },
-              child: Text("+"),
+                MaterialButton(
+                  color: Colors.white,
+                  height: 50,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      if (inputBox1.text.isNotEmpty) {
+                        task.add(inputBox1.text);
+                      }
+                    });
+                  },
+                  child: Text("+"),
+                ),
+              ],
             ),
             Expanded(
               child: ListView.builder(
@@ -81,22 +87,13 @@ class MainAppState extends State<MainApp> {
                         Container(
                           padding: EdgeInsets.all(10),
                           child: MaterialButton(
-                            color: Colors.red,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
                             onPressed: () {
                               setState(() {
                                 task.removeAt(index);
                               });
                             },
 
-                            child: Text(
-                              "-",
-                              style: TextStyle(
-                                color: const Color.fromARGB(255, 224, 224, 224),
-                              ),
-                            ),
+                            child: Icon(Icons.delete, color: Colors.red),
                           ),
                         ),
                       ],
